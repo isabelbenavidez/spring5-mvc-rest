@@ -5,9 +5,14 @@ import guru.springfamework.api.v1.model.CategoryDTO;
 import guru.springfamework.domain.Category;
 import org.junit.Test;
 
+import javax.print.attribute.standard.MediaSize;
+
 import static junit.framework.TestCase.assertEquals;
 
 public class CategoryMapperTest {
+
+    public static final String NAME = "Joe";
+    public static final long ID = 1L;
 
     CategoryMapper categoryMapper = CategoryMapper.INSTANCE;
 
@@ -16,16 +21,16 @@ public class CategoryMapperTest {
 
         //given
         Category category = new Category();
-        category.setName("Joe");
-        category.setId(1L);
-        category.setId(1L);
+        category.setName(NAME);
+        category.setId(ID);
+
 
         //When
         CategoryDTO categoroyDTO = categoryMapper.categoryToCategoryDTO(category);
 
         //Then
-        assertEquals(Long.valueOf(1L), categoroyDTO.getId());
-        assertEquals("Joe", categoroyDTO.getName());
+        assertEquals(Long.valueOf(ID), categoroyDTO.getId());
+        assertEquals(NAME, categoroyDTO.getName());
 
     }
 }
