@@ -13,6 +13,7 @@ import org.mockito.MockitoAnnotations;
 import java.util.Arrays;
 import java.util.List;
 
+import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.ArgumentMatchers.anyLong;
 import static org.mockito.Mockito.when;
 
@@ -71,6 +72,30 @@ public class CustomerServiceImplTest extends TestCase {
         //when
         CustomerDTO customerDTO = customerService.getCustomerById(1L);
         assertEquals("Ingrid", customerDTO.getFirstName());
+    }
+
+    @Test
+    public void creatNewCustomer() throws Exception{
+        //given
+        CustomerDTO customerDTO = new CustomerDTO();
+        customerDTO.setFirstName("Jorge");
+
+        Customer savedCustomer = new Customer();
+        savedCustomer.setFirstName(customerDTO.getFirstName());
+        savedCustomer.setLastName(customerDTO.getLastName());
+        savedCustomer.setId(1l);
+
+        when(customerRepository.save(any(Customer.class))).thenReturn(savedCustomer);
+
+        //when
+        CustomerDTO savedDto = customerService.createNewCustomer(customerDTO);
+
+        //then
+        assertEquals(customerDTO.getFirstName(), savedDto.getFirstName());
+        assertEquals("/api/v1/customer/1", savedDto.getCustomerUrl());
 
     }
+
+
+
 }
