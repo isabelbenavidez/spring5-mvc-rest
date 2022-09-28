@@ -1,4 +1,4 @@
-package guru.springfamework.api.mapper;
+package guru.springfamework.api.v1.mapper;
 
 import guru.springfamework.api.v1.mapper.CustomerMapper;
 import guru.springfamework.api.v1.model.CustomerDTO;
